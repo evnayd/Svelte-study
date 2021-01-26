@@ -11,8 +11,8 @@ function isValid1(password) {
 }
 
 function isValid(password) {
-	let letterArr = password.replace(/[0-9]/g, '').split('');
-	let lowerCaseArr = letterArr.filter(item => item == item.toLowerCase());
+	let lowerCaseArr = password.replace(/([a-z, 0-9])/g, '').split('');
+	console.log(lowerCaseArr);
 	if (lowerCaseArr.length>0) {
 		return true;
 	}
@@ -23,8 +23,7 @@ function isValid(password) {
 
 
 function isValid2(password) {
-	let letterArr = password.replace(/[0-9]/g, '').split('');
-	let upperCaseArr  = letterArr.filter(item => item == item.toUpperCase());
+	let upperCaseArr = password.replace(/([A-Z, 0-9])/g, '').split('');
 	if (upperCaseArr.length>0) {
 		return true;
 	}
