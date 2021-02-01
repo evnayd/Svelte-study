@@ -1,48 +1,40 @@
 <script>
 let value = '';
 
-$: lowerCaseError = !isValid(value);
-$: lengthError = !isValid1(value);
-$: upperCaseError = !isValid2(value);
-$: numberError = !isValid3(value);
+$: lengthError = !isValid(value, 'length');
+$: lowerCaseError = !isValid(value, 'lowercase');
+$: upperCaseError = !isValid(value, 'uppercase');
+$: numberError = !isValid(value, 'numbers');
 
-function isValid1(password) {
-	return password.length > 7 & password.length < 65;
+
+function isValid(password, requirement) {
+
+let upperCaseArr = password.replace(/[^A-Z]+/g, '').split('');
+
+console.log( upperCaseArr);
+let lowerCaseArr = password.replace(/[^a-z]+/g, '').split('');
+let num = password.slice();
+let numbers = num.replace(/[^0-9]+/g, '');
+console.log(numbers);
+
+ switch(requirement){
+case "length":
+	  return password.length > 7 & password.length < 65;
+	  
+case "lowercase":
+
+ return lowerCaseArr.length > 0;
+
+case "uppercase":
+
+return upperCaseArr.length > 0;
+
+
+case "numbers": 
+return numbers.length > 0
+
 }
-
-function isValid(password) {
-	let lowerCaseArr = password.replace(/([a-z, 0-9])/g, '').split('');
-	console.log(lowerCaseArr);
-	if (lowerCaseArr.length>0) {
-		return true;
-	}
-	else {
-		return false;
-	}
 }
-
-
-function isValid2(password) {
-	let upperCaseArr = password.replace(/([A-Z, 0-9])/g, '').split('');
-	if (upperCaseArr.length>0) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
-function isValid3(password) {
-	let num = password.slice();
-	let numbers = num.replace(/[^0-9]+/g, "");
-	if (numbers.length>0) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 
  function hideValue() {
 		if (password.type === 'text') 
@@ -87,7 +79,7 @@ function handleOnSubmit() {
 
 <style>
 	h1 {
-		color: green;
+		color: #0000ff;
 	}
 
     .active {

@@ -395,32 +395,32 @@ var app = (function () {
     			t14 = space();
     			button1 = element("button");
     			button1.textContent = "Confirm";
-    			attr_dev(h1, "class", "svelte-vxpa7u");
-    			add_location(h1, file, 70, 0, 1161);
-    			add_location(p, file, 71, 0, 1186);
+    			attr_dev(h1, "class", "svelte-1pdch00");
+    			add_location(h1, file, 62, 0, 1104);
+    			add_location(p, file, 63, 0, 1129);
     			attr_dev(input, "type", "text");
     			attr_dev(input, "id", "password");
-    			add_location(input, file, 73, 0, 1270);
-    			add_location(button0, file, 74, 0, 1318);
-    			add_location(div0, file, 72, 0, 1264);
-    			attr_dev(li0, "class", "svelte-vxpa7u");
-    			toggle_class(li0, "active", !/*lengthError*/ ctx[2]);
-    			add_location(li0, file, 77, 1, 1374);
-    			attr_dev(li1, "class", "svelte-vxpa7u");
-    			toggle_class(li1, "active", !/*lowerCaseError*/ ctx[1]);
-    			add_location(li1, file, 78, 1, 1429);
-    			attr_dev(li2, "class", "svelte-vxpa7u");
+    			add_location(input, file, 65, 0, 1213);
+    			add_location(button0, file, 66, 0, 1261);
+    			add_location(div0, file, 64, 0, 1207);
+    			attr_dev(li0, "class", "svelte-1pdch00");
+    			toggle_class(li0, "active", !/*lengthError*/ ctx[1]);
+    			add_location(li0, file, 69, 1, 1317);
+    			attr_dev(li1, "class", "svelte-1pdch00");
+    			toggle_class(li1, "active", !/*lowerCaseError*/ ctx[2]);
+    			add_location(li1, file, 70, 1, 1372);
+    			attr_dev(li2, "class", "svelte-1pdch00");
     			toggle_class(li2, "active", !/*upperCaseError*/ ctx[3]);
-    			add_location(li2, file, 79, 1, 1483);
-    			attr_dev(li3, "class", "svelte-vxpa7u");
+    			add_location(li2, file, 71, 1, 1426);
+    			attr_dev(li3, "class", "svelte-1pdch00");
     			toggle_class(li3, "active", !/*numberError*/ ctx[4]);
-    			add_location(li3, file, 80, 1, 1537);
-    			attr_dev(ul, "class", "svelte-vxpa7u");
-    			add_location(ul, file, 76, 0, 1368);
+    			add_location(li3, file, 72, 1, 1480);
+    			attr_dev(ul, "class", "svelte-1pdch00");
+    			add_location(ul, file, 68, 0, 1311);
     			attr_dev(button1, "type", "submit");
-    			add_location(button1, file, 83, 0, 1592);
+    			add_location(button1, file, 75, 0, 1535);
     			attr_dev(div1, "class", "container");
-    			add_location(div1, file, 69, 1, 1137);
+    			add_location(div1, file, 61, 1, 1080);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -463,12 +463,12 @@ var app = (function () {
     				set_input_value(input, /*value*/ ctx[0]);
     			}
 
-    			if (dirty & /*lengthError*/ 4) {
-    				toggle_class(li0, "active", !/*lengthError*/ ctx[2]);
+    			if (dirty & /*lengthError*/ 2) {
+    				toggle_class(li0, "active", !/*lengthError*/ ctx[1]);
     			}
 
-    			if (dirty & /*lowerCaseError*/ 2) {
-    				toggle_class(li1, "active", !/*lowerCaseError*/ ctx[1]);
+    			if (dirty & /*lowerCaseError*/ 4) {
+    				toggle_class(li1, "active", !/*lowerCaseError*/ ctx[2]);
     			}
 
     			if (dirty & /*upperCaseError*/ 8) {
@@ -499,39 +499,23 @@ var app = (function () {
     	return block;
     }
 
-    function isValid1(password) {
-    	return password.length > 7 & password.length < 65;
-    }
-
-    function isValid(password) {
-    	let lowerCaseArr = password.replace(/([a-z, 0-9])/g, "").split("");
-    	console.log(lowerCaseArr);
-
-    	if (lowerCaseArr.length > 0) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    }
-
-    function isValid2(password) {
-    	let upperCaseArr = password.replace(/([A-Z, 0-9])/g, "").split("");
-
-    	if (upperCaseArr.length > 0) {
-    		return true;
-    	} else {
-    		return false;
-    	}
-    }
-
-    function isValid3(password) {
+    function isValid(password, requirement) {
+    	let upperCaseArr = password.replace(/[^A-Z]+/g, "").split("");
+    	console.log(upperCaseArr);
+    	let lowerCaseArr = password.replace(/[^a-z]+/g, "").split("");
     	let num = password.slice();
     	let numbers = num.replace(/[^0-9]+/g, "");
+    	console.log(numbers);
 
-    	if (numbers.length > 0) {
-    		return true;
-    	} else {
-    		return false;
+    	switch (requirement) {
+    		case "length":
+    			return password.length > 7 & password.length < 65;
+    		case "lowercase":
+    			return lowerCaseArr.length > 0;
+    		case "uppercase":
+    			return upperCaseArr.length > 0;
+    		case "numbers":
+    			return numbers.length > 0;
     	}
     }
 
@@ -544,8 +528,8 @@ var app = (function () {
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let lowerCaseError;
     	let lengthError;
+    	let lowerCaseError;
     	let upperCaseError;
     	let numberError;
     	let { $$slots: slots = {}, $$scope } = $$props;
@@ -573,22 +557,19 @@ var app = (function () {
 
     	$$self.$capture_state = () => ({
     		value,
-    		isValid1,
     		isValid,
-    		isValid2,
-    		isValid3,
     		hideValue,
     		handleOnSubmit,
-    		lowerCaseError,
     		lengthError,
+    		lowerCaseError,
     		upperCaseError,
     		numberError
     	});
 
     	$$self.$inject_state = $$props => {
     		if ("value" in $$props) $$invalidate(0, value = $$props.value);
-    		if ("lowerCaseError" in $$props) $$invalidate(1, lowerCaseError = $$props.lowerCaseError);
-    		if ("lengthError" in $$props) $$invalidate(2, lengthError = $$props.lengthError);
+    		if ("lengthError" in $$props) $$invalidate(1, lengthError = $$props.lengthError);
+    		if ("lowerCaseError" in $$props) $$invalidate(2, lowerCaseError = $$props.lowerCaseError);
     		if ("upperCaseError" in $$props) $$invalidate(3, upperCaseError = $$props.upperCaseError);
     		if ("numberError" in $$props) $$invalidate(4, numberError = $$props.numberError);
     	};
@@ -599,26 +580,26 @@ var app = (function () {
 
     	$$self.$$.update = () => {
     		if ($$self.$$.dirty & /*value*/ 1) {
-    			 $$invalidate(1, lowerCaseError = !isValid(value));
+    			 $$invalidate(1, lengthError = !isValid(value, "length"));
     		}
 
     		if ($$self.$$.dirty & /*value*/ 1) {
-    			 $$invalidate(2, lengthError = !isValid1(value));
+    			 $$invalidate(2, lowerCaseError = !isValid(value, "lowercase"));
     		}
 
     		if ($$self.$$.dirty & /*value*/ 1) {
-    			 $$invalidate(3, upperCaseError = !isValid2(value));
+    			 $$invalidate(3, upperCaseError = !isValid(value, "uppercase"));
     		}
 
     		if ($$self.$$.dirty & /*value*/ 1) {
-    			 $$invalidate(4, numberError = !isValid3(value));
+    			 $$invalidate(4, numberError = !isValid(value, "numbers"));
     		}
     	};
 
     	return [
     		value,
-    		lowerCaseError,
     		lengthError,
+    		lowerCaseError,
     		upperCaseError,
     		numberError,
     		handleOnSubmit,
