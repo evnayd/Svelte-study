@@ -1,5 +1,6 @@
 <script>
 let value = '';
+let inputType = 'text';
 
 $: lengthError = !isValid(value, 'length');
 $: lowerCaseError = !isValid(value, 'lowercase');
@@ -10,12 +11,9 @@ $: numberError = !isValid(value, 'numbers');
 function isValid(password, requirement) {
 
 let upperCaseArr = password.replace(/[^A-Z]+/g, '').split('');
-
-console.log( upperCaseArr);
 let lowerCaseArr = password.replace(/[^a-z]+/g, '').split('');
 let num = password.slice();
 let numbers = num.replace(/[^0-9]+/g, '');
-console.log(numbers);
 
  switch(requirement){
 case "length":
@@ -63,7 +61,7 @@ function handleOnSubmit() {
 <h1>Change password</h1>
 <p>Please enter a new password to complete the password recovery process.</p>
 <div>
-<input type="text"  id ="password" bind:value/>
+<input type={inputType}   on:input={(e) => (value = e.target.value)} id ="password" />
 <button on:click={hideValue}>HIDE</button>
 </div>
 <ul>
@@ -77,9 +75,10 @@ function handleOnSubmit() {
 </div>
 
 
+
 <style>
 	h1 {
-		color: #0000ff;
+		color: green;
 	}
 
     .active {
