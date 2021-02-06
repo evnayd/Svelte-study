@@ -84,13 +84,9 @@ function handleOnSubmit() {
 	@tailwind components;
 	@tailwind utilities;
 
-
-    .active {
-		outline : green 2px solid;
-	}
-
-	ul {
-		width: 200px;
+	.active {
+		background-color: #A596CE;
+		color: #2F1A66;
 	}
 
 	</style>
