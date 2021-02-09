@@ -58,12 +58,12 @@ function handleOnSubmit() {
 </script>
 
 	<div class="container mx-auto">
-		<div class="bg-white w-full  lg:w-1/2 mx-auto shadow-md p-6 xl:p-14 text-left sm:text-center my-16 lg:my-32">
+		<div class="bg-white w-full  md:w-2/3 mx-auto shadow-md p-6 xl:p-14 text-left sm:text-center my-16 lg:my-32">
 <h1 class="font-black text-xl sm:text-4xl mb-2 sm:mb-8">Change password</h1>
 <p>Please enter a new password to complete the password recovery process.</p>
 <div class="relative">
 <input class="text-gray-500 text-lg w-full border-b-2 mb-2 p-1 outline-none overflow-hidden" type={inputType}   on:input={(e) => (value = e.target.value)} id ="password" />
-<button class="absolute bottom-3 right-1 text-gray-300 hover:text-gray-400 focus: outline-none focus: border-none" on:click={hideValue}>HIDE</button>
+<button class="absolute bottom-3 right-1 text-gray-300 hover:text-gray-400 focus:outline-none focus:border-none" on:click={hideValue}>HIDE</button>
 </div>
 <ul class="flex flex-col sm:flex-row justify-between text-sm mb-6 flex-nowrap">
 	<li class="w-3/5 sm:w-auto bg-gray-300  rounded-lg px-3.5  py-2 text-gray-500  m-1  text-left sm:text-center break-normal flex-auto"  class:active ={!lengthError}>8-64 characters</li>
